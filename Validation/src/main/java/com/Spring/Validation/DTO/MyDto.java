@@ -10,11 +10,11 @@ public class MyDto {
     @Min(10)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "Name cannot be empty")
     private String name;
 
     @NotBlank
-    @Email
+    @Email(message = "Enter a valid email")
     private String email;
 
     public int getId() {

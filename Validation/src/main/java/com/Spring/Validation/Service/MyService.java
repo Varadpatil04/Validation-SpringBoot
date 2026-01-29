@@ -38,7 +38,7 @@ public class MyService {
 
     }
     public MyDto updateEmail(int id, String email) {
-        MyEntity entity = repo.findById(id).orElse(null);
+        MyEntity entity = repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found" + id));
         entity.setEmail(email);
         repo.save(entity);
         return mainMapper.toDto(entity);
@@ -47,5 +47,12 @@ public class MyService {
 
     public void deleteUser(int id) {
         repo.deleteById(id);
+    }
+
+
+    public class ResourceNotFoundException extends RuntimeException{
+        public ResourceNotFoundException(String message){
+            super(message);
+        }
     }
 }
